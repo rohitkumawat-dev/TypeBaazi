@@ -111,13 +111,13 @@ export default function Lobby({session,user,onLeave}){
     <div className="race-heading"><div><h1 className="page-title">Find your rhythm.</h1><p className="muted small">You vs {friend?.name}</p></div><span className={`clock ${remaining<=10?'negative':''}`}><Timer size={22}/>{remaining}s</span></div>
     <div className="progress-track"><div style={{width:`${Math.min(100,remaining/room.durationSeconds*100)}%`}}/></div>
     <div className="passage" aria-label="Passage to type">{room.paragraph?room.paragraph.split('').map((c,i)=><span key={i} ref={i===typed.length?cursor:null} className={i<typed.length?(typed[i]===c?'correct':'incorrect'):i===typed.length?'caret':''}>{c}</span>):'Preparing your passage…'}</div>
-    <label>Type the passage here<textarea ref={input} rows={4} value={typed} onChange={type} onPaste={e=>e.preventDefault()} onDrop={e=>e.preventDefault()} disabled={!racing||!room.paragraph} maxLength={room.paragraph.length} spellCheck={false} autoComplete="off" autoCorrect="off" autoCapitalize="off" placeholder="Start typing…"/></label>
+    <label>Type here <textarea ref={input} rows={4} value={typed} onChange={type} onPaste={e=>e.preventDefault()} onDrop={e=>e.preventDefault()} disabled={!racing||!room.paragraph} maxLength={room.paragraph.length} spellCheck={false} autoComplete="off" autoCorrect="off" autoCapitalize="off" placeholder="Start typing…"/></label>
     <p className="muted small">{racing?'Your opponent’s typing stays hidden until the finish.':'Time’s up. Getting your results…'}</p>
    </>}
-   {finished&&<div className="results"><Trophy size={40} className="accent"/><p className="eyebrow">THE RESULTS ARE IN</p><h1 className="page-title">{room.winner}</h1><p className="muted">{room.durationSeconds} seconds of friendly rivalry.</p>
+   {finished&&<div className="results"><Trophy size={40} className="accent"/><p className="eyebrow">Results are heree !!!</p><h1 className="page-title">{room.winner}</h1><p className="muted">{room.durationSeconds} seconds of friendly rivalry.</p>
     <div className="result-grid">{room.players.map((p,i)=><div className={`result-card ${p.you?'your-result':''}`} key={i}><h2>{p.name} {p.you&&<small className="accent">YOU</small>}</h2><strong className="wpm">{p.wpm}<small>WPM</small></strong><div className="result-details"><span>Accuracy<strong className="positive">{p.accuracy}%</strong></span><span>Mistakes<strong className="negative">{p.mistakes}</strong></span></div></div>)}</div>
     <p className="small muted">{room.resultSaved?'Saved to your profile history.':'Saving your result — please wait…'}</p>
-    <p className="small muted">WPM = correct characters ÷ 5 ÷ race minutes. Mistakes are incorrect characters remaining in the saved text; corrected mistakes are not counted.</p>
+    <p className="small muted">WPM = correct characters ÷ 5 ÷ race minutes. Mistakes jo aapne galat type kiya vo; corrected mistakes isme count nahi honge.</p>
    </div>}
    {error&&<p className="error" role="alert">{error}</p>}{syncError&&<p className="error" role="status">{syncError}</p>}
    <button className="text-button" disabled={busy} onClick={leave}>{finished?'Back home · view history':waiting&&me?.host?'Close room & return home':'Leave room'}</button>
